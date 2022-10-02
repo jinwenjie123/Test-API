@@ -20,15 +20,22 @@ app.listen(3000, () => {
 })
 
 const slack_app = new App({
-  token: 'xoxb-4162327395364-4159893548226-Aao3eLRnBtK3iVR2jfPPFteT',
+  token: 'xoxb-4162327395364-4159893548226-KKrES1zK4ZBeVXiepGk1juVw',
   signingSecret: 'b8660aa835c195abe26dc289ca9c9832'
 });
 
 (async () => {
-  const result = await slack_app.client.users.profile.get({
-    token: 'xoxb-4162327395364-4159893548226-Aao3eLRnBtK3iVR2jfPPFteT',
-    include_labels: true,
-    user: 'U0452F6RFUZ'
+  const list = await slack_app.client.users.list({
+    token: 'xoxb-4162327395364-4159893548226-KKrES1zK4ZBeVXiepGk1juVw'
   });
-  console.log(result)
+ // console.log(list);
+  for (let i = 0; i < list.members.length; i++) {
+    if(list.members[i].name !== "slackbot" && list.members[i].name !== "testapi" && list.members[i].name !== "test2"){
+        console.log("id: " + list.members[i].id);
+        console.log("name: " + list.members[i].real_name);
+        console.log("          ");
+    }
+  }
+
 })();
+
